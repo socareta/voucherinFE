@@ -19,7 +19,7 @@
                     <td>{{ voucher.voucher_title }}</td>
                     <td>{{ voucher.valid_start }}</td>
                     <td>{{ voucher.valid_end }}</td>
-                    <td>{{ voucher.count_selling }}</td>
+                    <td>{{ voucher.generate }}</td>
                     <td>{{ voucher.status }}</td>
                     <td>
                       <div class="dropdown">
@@ -31,6 +31,7 @@
                               <a class="dropdown-item" @click="editVoucher(voucher,index)">Edit</a>
                               <a class="dropdown-item" @click="alert('Please try later')">Delete</a>
                               <a class="dropdown-item" @click="generateVoucher(voucher,index)">Generate</a>
+                              <a v-if="voucher.generate" class="dropdown-item" @click="$root.$router.push({ path: 'voucher-list/' + voucher.id})">Voucher List</a>
                             </div>
                       </div>
                     </td>

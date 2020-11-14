@@ -2,7 +2,7 @@
     <div>
         <button class="btn btn-info" @click="addUser()">Add User</button>
         <p></p>
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <th>Name</th>
             <th>Email</th>

@@ -2,7 +2,7 @@
     <div>
         <button class="btn btn-info " @click="addProperty">Add Property</button><p></p>
         <p>
-           <table class="table table-bordered">
+           <table class="table table-hover">
                 <thead>
                     <th>Name</th>
                     <th>Star</th>

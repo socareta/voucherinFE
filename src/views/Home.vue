@@ -1,17 +1,18 @@
 <template>
   <div class="home">
-    <Dashboard msg="Welcome to voucherinApp"/>
+      <div class="logo-container">
+        <img src="../assets/voucherin logo.jpeg" alt="" class="logo">
+      </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Dashboard from '@/components/Dashboard.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    Dashboard
-  }
+  name: 'Home'
 }
 </script>
+<style lang="css" scoped>
+.home {
+    text-align: center;
+}
+</style>

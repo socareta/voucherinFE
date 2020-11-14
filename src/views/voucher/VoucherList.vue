@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-lg-4 md-lg-6">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Voucher Code ir voucher id" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" v-model="param" placeholder="Voucher Code id voucher id" aria-describedby="button-search">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="search">Search</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-search" @click="search">Search</button>
                     </div>
                 </div>
             </div>
@@ -16,8 +16,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item">Redeem</a>
-                        <a class="dropdown-item" >Deactive</a>
-                        <a class="dropdown-item" >Download Voucher</a>
+                        <a class="dropdown-item">Deactive</a>
+                        <a class="dropdown-item">Download Voucher</a>
+                        <a class="dropdown-item">Set As Giveaway</a>
                     </div>
                 </div>
                 <div class="dropdown ml-2">
@@ -47,9 +48,10 @@
                                     Action
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item">Redeem</a>
-                                    <a class="dropdown-item" >Deactive</a>
-                                    <a class="dropdown-item" >Download Voucher</a>
+                                        <a class="dropdown-item">Redeem</a>
+                                        <a class="dropdown-item" >Deactive</a>
+                                        <a class="dropdown-item" >Download Voucher</a>
+                                        <a class="dropdown-item">Set As Giveaway</a>
                                     </div>
                                 </div>
                             </td>
@@ -62,10 +64,11 @@
         <ConfirmationModal
         v-if="confirmationModal"
         @closeConfirmationModal="closeConfirmationModal"
-        isSuccess="isSuccess"
-        title="confirmationTitle"
-        message="confirmationMessage"
-        @isConfirmed="isConfirmed"/>
+        :isSuccess="isSuccess"
+        :title="confirmationTitle"
+        :message="confirmationMessage"
+        :isAllert="isAllert"
+        @isConfirmed="isConfirmedAction"/>
     </div>
 </template>
 <script>
@@ -77,11 +80,14 @@ export default {
   data () {
     return {
       voucherLists: [],
-      voucher: null,
+      voucher: [],
       query: null,
       confirmationModal: false,
       confirmationTitle: null,
       confirmationMessage: null,
+      isAllert: true,
+      isConfirmed: false,
+      isSuccess: true,
       param: null
     }
   },
@@ -90,19 +96,19 @@ export default {
   },
   methods: {
     search: function () {
-      if (!this.query) {
-        Axios.get('voucher/list' + this.query).then(response => {
-          if (response.data.success === true) {
-            this.voucherLists = response.data.data
-          } else {
-            alert(response.data.errors)
-          }
-        })
+      if (this.param != null) {
+        this.getVoucherList()
       }
     },
     getVoucherList: function () {
-      Axios.post('voucher/list', this.query).then(response => {
-        alert()
+      Axios.get('voucher/list/' + this.param).then(response => {
+        if (response.data.success === true) {
+          this.voucherLists = response.data.data
+          this.voucher = response.data.voucher
+        } else {
+          this.confirmationModal = true
+          this.confirmationMessage = response.data.message
+        }
       })
     },
     bulkReedem: function () {
@@ -117,25 +123,16 @@ export default {
     closeConfirmationModal: function () {
       this.confirmationModal = false
     },
-    isConfirmed: function () {
+    isConfirmedAction: function () {
       return true
     },
     checkParam: function () {
       const voucherId = this.$route.params.id
       if (voucherId) {
-        Axios.get('voucher/list/' + voucherId).then(response => {
-          if (response.data.success === true) {
-            this.voucherLists = response.data.data
-            this.voucher = response.data.voucher
-          }
-        })
+        this.param = voucherId
+        this.getVoucherList()
       }
     }
   }
 }
 </script>
-<style lang="css">
-  table.table tr td, .table th{
-    padding:5px
-  }
-</style>

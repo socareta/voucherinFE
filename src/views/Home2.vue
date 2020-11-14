@@ -54,6 +54,11 @@ export default {
       if (this.isLoggedIn === false) {
         this.$router.push({ name: 'Login' })
       }
+    },
+    setPropertyActive: function () {
+      const meta = JSON.parse(localStorage.getItem('vMeta'))
+      const propertyActive = meta.property[0]
+      localStorage.setItem('propertyActive', propertyActive.id)
     }
   }
 }

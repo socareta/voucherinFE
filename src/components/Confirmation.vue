@@ -4,8 +4,8 @@
             <img :src="isSuccess === true ? imageSuccess : imageFailed" alt="" class="animation">
             <h4 class="title">{{ title }}</h4>
             <p class="message">{{ message }}</p>
-            <button class="btn btn-warning" v-if="!isAllert" @click="closeConfirmationModal">No</button>
-            <button class="btn btn-info ml-2" @click="closeConfirmationModal">OK</button>
+            <button class="btn btn-warning" v-if="!isAllert" @click="closeModal">No</button>
+            <button class="btn btn-info ml-2" @click="closeModal">OK</button>
 
         </div>
     </div>

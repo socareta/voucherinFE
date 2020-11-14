@@ -94,6 +94,7 @@ export default {
               properties: response.data.properties,
               propertyTypes: response.data.propertyTypes
             }))
+            localStorage.setItem('propertyActive', response.data.properties[0].id)
             resolve()
           })
         } else {

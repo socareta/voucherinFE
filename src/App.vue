@@ -45,5 +45,11 @@ export default {
     height: 100vh;
     overflow: auto;
     }
-
+a.dropdown-item {
+    cursor: pointer;
+}
+ table.table tr td, .table th{
+    padding:2px!important;
+    vertical-align: middle;
+  }
 </style>

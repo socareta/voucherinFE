@@ -20,15 +20,10 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="/users">Users</a>
                   <a class="dropdown-item" href="/property">Property</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li>
               <li class="nav-item">
               <router-link class="nav-link" to="/voucher">Voucher</router-link>
-              </li>
-              <li class="nav-item">
-              <router-link class="nav-link" to="/report">Report</router-link>
               </li>
             </template>
           </ul>
@@ -44,8 +39,8 @@
                  {{ user.name }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="ddUser">
-                  <a class="dropdown-item" href="/users">Profile</a>
-                  <a class="dropdown-item" href="#">Property</a>
+                  <router-link class="dropdown-item" to="/profile">Profile </router-link>
+                  <a class="dropdown-item" href="/property">Property</a>
                   <a class="dropdown-item" @click="logout">Logout</a>
                 </div>
               </li>
