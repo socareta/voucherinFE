@@ -1,19 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <Navbar/>
+    <div class="container pt-4">
+      <router-view/>
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+import Navbar from '@/components/header/Navbar.vue'
+
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -29,4 +36,14 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+ .modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.2);
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    }
+
 </style>
